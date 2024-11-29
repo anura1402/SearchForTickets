@@ -3,5 +3,16 @@
     <style name="Base.Theme.EMTestTask" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigationStyle</item>
+    </style>
+
+    <style name="BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundTint">@color/black</item>
+    </style>
+    <style name="BottomNavigationTextStyle">
+        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EMTestTask</string>
+    <string name="hotels_string">Отели</string>
+    <string name="air_tickets_string">Авиабилеты</string>
+    <string name="shorter_string">Короче</string>
+    <string name="subscription_string">Подписки</string>
+    <string name="profile_string">Профиль</string>
 </resources>
