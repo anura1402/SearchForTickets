@@ -15,4 +15,5 @@
         <item name="android:fontFamily">@font/sf_pro_display_regular</item>
         <item name="android:textSize">12sp</item>
     </style>
+
 </resources>
