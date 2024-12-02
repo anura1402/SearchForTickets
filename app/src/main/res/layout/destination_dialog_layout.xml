@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/icon_background"
-                android:backgroundTint="@color/green">
+                android:backgroundTint="@color/green"
+                app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:id="@+id/iv_difficult_way"
@@ -42,7 +43,7 @@
                 android:gravity="center"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Сложный маршрут"
+                android:text="@string/difficult_way"
                 android:textSize="11sp" />
 
         </LinearLayout>
@@ -59,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/icon_background"
-                android:backgroundTint="@color/blue">
+                android:backgroundTint="@color/blue"
+                app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:id="@+id/iv_whereever"
@@ -76,7 +78,7 @@
                 android:gravity="center"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Куда угодно"
+                android:text="@string/whereever"
                 android:textSize="11sp" />
 
         </LinearLayout>
@@ -93,7 +95,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/icon_background"
-                android:backgroundTint="@color/blue">
+                android:backgroundTint="@color/blue"
+                app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:id="@+id/iv_holiday"
@@ -110,7 +113,7 @@
                 android:gravity="center"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Выходные"
+                android:text="@string/holidays"
                 android:textSize="11sp" />
 
         </LinearLayout>
@@ -127,7 +130,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/icon_background"
-                android:backgroundTint="@color/red">
+                android:backgroundTint="@color/red"
+                app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:id="@+id/iv_hot_tickets"
@@ -141,10 +145,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:gravity="center"
-                android:text="Горячие билеты"
+                android:text="@string/hot_tickets"
                 android:textSize="11sp" />
 
         </LinearLayout>
@@ -153,108 +157,132 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_card_view_background">
+        app:cardCornerRadius="16dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
-                android:src="@drawable/istanbul"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/istanbul"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/popular_destination"/>
-            </LinearLayout>
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@color/grey5" />
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
-                android:src="@drawable/sochi"/>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_square_for_small_photo"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/istanbul" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/istanbul" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/popular_destination" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/grey5" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sochi"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/popular_destination"/>
-            </LinearLayout>
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@color/grey5" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
-                android:src="@drawable/phuket"
-                />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-                <TextView
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_square_for_small_photo"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sochi" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/phuket"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/popular_destination"/>
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sochi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/popular_destination" />
+                </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/grey5" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_square_for_small_photo"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/phuket" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phuket" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/popular_destination" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="@color/grey5" />
         </LinearLayout>

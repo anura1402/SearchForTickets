@@ -13,4 +13,16 @@
     <string name="sochi">Сочи</string>
     <string name="istanbul">Стамбул</string>
     <string name="popular_destination">Популярное направление</string>
+    <string name="price_example">от 22 264 Р</string>
+    <string name="country_example">Будапешт</string>
+    <string name="star_example">Die Antwood</string>
+    <string name="direct_flights">Прямые рейсы</string>
+    <string name="hot_tickets">Горячие билеты</string>
+    <string name="holidays">Выходные</string>
+    <string name="whereever">Куда угодно</string>
+    <string name="difficult_way">Сложный маршрут</string>
+    <string name="watch_all_tickets">Посмотреть все билеты</string>
+    <string name="subscribe_for_price">Подписка на цену</string>
+    <string name="filter">Фильтр</string>
+    <string name="price_schedule">График цен</string>
 </resources>
