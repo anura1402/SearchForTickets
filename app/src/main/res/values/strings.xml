@@ -9,4 +9,8 @@
     <string name="to_Turkey">Куда - Турция</string>
     <string name="from_Moscow">Откуда - Москва</string>
     <string name="fly_musically">Музыкально отлететь</string>
+    <string name="phuket">Пхукет</string>
+    <string name="sochi">Сочи</string>
+    <string name="istanbul">Стамбул</string>
+    <string name="popular_destination">Популярное направление</string>
 </resources>

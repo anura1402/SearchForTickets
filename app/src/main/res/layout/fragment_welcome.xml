@@ -112,4 +112,14 @@
         app:layout_constraintTop_toBottomOf="@id/cv_1"
         android:fontFamily="@font/sf_pro_display_semibold"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_fly_musically"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/fly_musically" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
