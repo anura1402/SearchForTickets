@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,23 +32,30 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/tv_direction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_pro_display_medium"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="3dp"
+                        android:textColor="@color/white"
+                        android:text="@string/direction"
+                        tools:text="Москва - Сочи"
+                        android:textSize="16sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_pro_display_medium"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="3dp"
-                    android:text="Москва-Сочи"
-                    android:textColor="@color/white" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_pro_display_regular"
-                    android:paddingBottom="8dp"
-                    android:text="23 февраля, 1 пассажир"
-                    android:textColor="@color/grey6" />
+                    <TextView
+                        android:id="@+id/tv_date_and_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_pro_display_regular"
+                        android:paddingBottom="8dp"
+                        android:textColor="@color/grey6"
+                        android:text="@string/date_and_count"
+                        tools:text="23 февраля, 1 пассажир"
+                        android:textSize="14sp"/>
+
 
             </LinearLayout>
         </LinearLayout>
@@ -82,18 +90,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:drawableStart="@drawable/ic_filter"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="@string/filter" />
+                android:textSize="14sp"
+                android:text="@string/filter"
+                app:drawableStartCompat="@drawable/ic_filter" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_schedule"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="@string/price_schedule" />
+                android:textSize="14sp"
+                android:text="@string/price_schedule"
+                app:drawableStartCompat="@drawable/ic_schedule" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -10,7 +10,9 @@
         android:id="@+id/cv_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
         app:cardBackgroundColor="@color/grey8"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
@@ -39,19 +41,33 @@
                 android:layout_margin="5dp"
                 android:orientation="vertical">
 
-
-                <TextView
-                    android:id="@+id/editTextText3"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
-                    android:drawableEnd="@drawable/ic_change"
-                    android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@color/white"
-                    tools:text="Минск" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_from"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="9"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/sf_pro_display_regular"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="Минск" />
+
+                    <ImageView
+                        android:id="@+id/ic_change"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/clean"
+                        android:src="@drawable/ic_change" />
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -60,18 +76,34 @@
                     android:layout_marginEnd="10dp"
                     android:background="@color/grey4" />
 
-                <TextView
-                    android:id="@+id/editTextText4"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
-                    android:drawableEnd="@drawable/ic_clean"
-                    android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@color/white"
-                    tools:text="Турция" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_to"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="11dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="9"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/sf_pro_display_regular"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="Турция" />
+
+                    <ImageView
+                        android:id="@+id/ic_clean"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/clean"
+                        android:src="@drawable/ic_clean" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -80,7 +112,8 @@
         android:id="@+id/sv_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_search">
@@ -91,43 +124,60 @@
             android:orientation="horizontal">
 
             <Button
+
+                android:id="@+id/button_back_way"
                 style="@style/RoundedButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:drawableLeft="@drawable/ic_plus"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="обратно" />
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/back"
+                android:textAllCaps="false"
+                android:textSize="14sp" />
 
             <Button
+                android:id="@+id/button_date"
                 style="@style/RoundedButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:fontFamily="@font/sf_pro_display_regular"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="24 фев, сб" />
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                tools:text="24 фев, сб" />
 
             <Button
+                android:id="@+id/button_type_of_flight"
                 style="@style/RoundedButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:drawableLeft="@drawable/ic_profile_small"
+                android:fontFamily="@font/sf_pro_display_regular"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="1, эконом" />
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:text="@string/example_of_pass_count_and_class" />
 
             <Button
+                android:id="@+id/button_filters"
                 style="@style/RoundedButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:drawableLeft="@drawable/ic_filter"
+                android:fontFamily="@font/sf_pro_display_regular"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:text="фильтры" />
+                android:text="@string/filters"
+                android:textAllCaps="false"
+                android:textSize="14sp" />
 
         </LinearLayout>
     </HorizontalScrollView>
@@ -135,10 +185,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_flights"
         style="@style/RoundedCardViewStyle"
-        android:backgroundTint="@color/grey1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:backgroundTint="@color/grey1"
         app:cardCornerRadius="16dp"
         app:layout_constraintTop_toBottomOf="@+id/sv_buttons">
 
@@ -153,7 +203,8 @@
                 android:fontFamily="@font/sf_pro_display_semibold"
                 android:padding="16dp"
                 android:text="@string/direct_flights"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,7 +225,8 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Уральские авиалинии"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -196,7 +248,8 @@
                     android:paddingStart="48dp"
                     android:paddingEnd="16dp"
                     android:text="07:00 09:00 10:00"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -226,7 +279,8 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Победа"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -248,7 +302,8 @@
                     android:paddingStart="48dp"
                     android:paddingEnd="16dp"
                     android:text="07:00 09:00 10:00"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -278,7 +333,8 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="NordStar"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -300,8 +356,10 @@
                     android:paddingStart="48dp"
                     android:paddingEnd="16dp"
                     android:text="07:00 09:00 10:00"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -321,6 +379,7 @@
         android:fontFamily="@font/sf_pro_display_regular"
         android:text="@string/watch_all_tickets"
         android:textColor="@android:color/white"
+        android:textSize="16sp"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -330,9 +389,11 @@
         android:id="@+id/footer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/grey2"
-android:backgroundTint="@color/grey2"
+        android:backgroundTint="@color/grey2"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -341,24 +402,27 @@ android:backgroundTint="@color/grey2"
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:orientation="horizontal">
+            android:paddingEnd="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:drawableStart="@drawable/ic_bell"
-                android:fontFamily="@font/sf_pro_display_regular"
+                android:drawableStart="@drawable/ic_bell_blue"
                 android:drawablePadding="8dp"
+                android:fontFamily="@font/sf_pro_display_regular"
                 android:text="@string/subscribe_for_price"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end|center"/>
+                android:checked="false"
+                android:gravity="end|center"
+                android:theme="@style/SCBSwitch" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -13,7 +13,7 @@
     </style>
     <style name="BottomNavigationTextStyle">
         <item name="android:fontFamily">@font/sf_pro_display_regular</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="RoundedButtonStyle" parent ="Widget.MaterialComponents.Button">
@@ -27,6 +27,14 @@
     <style name="RoundedCardViewStyle" parent ="Base.CardView">
         <item name="backgroundTint">@color/grey3</item>
         <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/blue</item>
+        <item name="android:colorForeground">#f1f1f1</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
     </style>
 
 </resources>
