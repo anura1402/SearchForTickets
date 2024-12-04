@@ -6,8 +6,11 @@ import retrofit2.Response
 import ru.anura.emtesttask.data.model.Offer
 import ru.anura.emtesttask.data.model.Offers
 import ru.anura.emtesttask.domain.OffersRepository
+import javax.inject.Inject
 
-class OffersRepositoryImpl (private val apiService: ApiService) : OffersRepository {
+class OffersRepositoryImpl @Inject constructor(
+    private val apiService: ApiService
+) : OffersRepository {
 
     override suspend fun getOffers(): List<Offer>? {
         return try {

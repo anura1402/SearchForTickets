@@ -3,18 +3,14 @@ package ru.anura.emtesttask.presentation
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,19 +20,33 @@ import ru.anura.emtesttask.data.MockServer
 import ru.anura.emtesttask.data.OffersRepositoryImpl
 import ru.anura.emtesttask.databinding.FragmentWelcomeBinding
 import ru.anura.emtesttask.domain.FlyMusicallyItem
-import ru.anura.emtesttask.domain.GetOffersUseCase
 import ru.anura.emtesttask.presentation.adapters.OffersListAdapter
+import javax.inject.Inject
 
 class WelcomeFragment : Fragment() {
     private var _binding: FragmentWelcomeBinding? = null
     private val binding: FragmentWelcomeBinding
         get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: WelcomeViewModel
-    private lateinit var mockServer: MockServer
+    @Inject
+    lateinit var mockServer: MockServer
+
+    private val component by lazy {
+        (requireActivity().application as SearchApp).component
+    }
+    //private lateinit var viewModel: WelcomeViewModel
+
     private lateinit var offersListAdapter: OffersListAdapter
     private lateinit var imm: InputMethodManager
     private val dialog = SearchDialogFragment()
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,31 +58,15 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel = ViewModelProvider(this)[WelcomeViewModel::class.java]
         setupRecyclerView()
-        lifecycleScope.launch(Dispatchers.IO) {
-            val assetManager = context?.assets // Используем context для доступа к assets
-            val inputStream = assetManager?.open("offers.json")
-            if (inputStream !== null) {
-                mockServer = MockServer(inputStream)
-                mockServer.start()
-                val apiService = ApiFactory.createApiService(mockServer.getUrl())
-                Log.d("MainActivityOffer", "urlWF: ${mockServer.getUrl()}")
-                val repository = OffersRepositoryImpl(apiService)
-                withContext(Dispatchers.Main) {
-                    // Получаем URL для Retrofit
-                    viewModel = ViewModelProvider(
-                        this@WelcomeFragment,
-                        WelcomeViewModelFactory(repository)
-                    )[WelcomeViewModel::class.java]
-                    viewModel.getOffers()
-                    viewModel.offers.observe(viewLifecycleOwner) { offers ->
-                        offers.forEach { offer ->
-                            Log.d("MainActivityOffer", "Offer: $offer")
-                        }
-                    }
-                }
-            }
+        //viewModel = ViewModelProvider(this)[WelcomeViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[WelcomeViewModel::class.java]
+        viewModel.getOffers()
+        viewModel.offers.observe(viewLifecycleOwner) { offers ->
+
+//            offers.forEach { offer ->
+//                Log.d("WelcomeFragment", "Offer: $offer")
+//            }
         }
 
         actionWithEtTo()

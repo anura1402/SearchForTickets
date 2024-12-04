@@ -12,11 +12,9 @@ import ru.anura.emtesttask.data.OffersRepositoryImpl
 import ru.anura.emtesttask.data.model.Offer
 import ru.anura.emtesttask.domain.GetOffersUseCase
 import ru.anura.emtesttask.domain.OffersRepository
+import javax.inject.Inject
 
-class WelcomeViewModel(private val repository: OffersRepository): ViewModel() {
-    //private val repository = OffersRepositoryImpl(application)
-
-    private val getOffersUseCase= GetOffersUseCase(repository)
+class WelcomeViewModel @Inject constructor(private val getOffersUseCase:GetOffersUseCase): ViewModel() {
 
     private val _offers = MutableLiveData<List<Offer>>()
     val offers: LiveData<List<Offer>> = _offers

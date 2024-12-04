@@ -1,6 +1,8 @@
 package ru.anura.emtesttask.domain
 
-class GetOffersUseCase(private val offersRepository: OffersRepository) {
+import javax.inject.Inject
 
-    suspend operator fun invoke() = offersRepository.getOffers()
+class GetOffersUseCase @Inject constructor(private val repository: OffersRepository) {
+
+    suspend operator fun invoke() = repository.getOffers()
 }

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -66,5 +67,8 @@ dependencies {
 
     //mock
     implementation (libs.mockwebserver)
+
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 
 }
