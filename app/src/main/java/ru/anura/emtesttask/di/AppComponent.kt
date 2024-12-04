@@ -5,10 +5,8 @@ import dagger.BindsInstance
 import dagger.Component
 import ru.anura.emtesttask.presentation.MainActivity
 import ru.anura.emtesttask.presentation.SearchApp
-import ru.anura.emtesttask.presentation.SearchDialogFragment
 import ru.anura.emtesttask.presentation.TheCountryWasChosenFragment
 import ru.anura.emtesttask.presentation.WatchAllTicketsFragment
-import ru.anura.emtesttask.presentation.WatchAllTicketsViewModel
 import ru.anura.emtesttask.presentation.WelcomeFragment
 import javax.inject.Singleton
 

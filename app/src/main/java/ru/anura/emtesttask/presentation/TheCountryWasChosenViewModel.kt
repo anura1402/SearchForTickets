@@ -10,8 +10,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.anura.emtesttask.domain.model.OfferTickets
 import ru.anura.emtesttask.domain.GetOffersTicketsUseCase
+import ru.anura.emtesttask.domain.model.OfferTickets
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

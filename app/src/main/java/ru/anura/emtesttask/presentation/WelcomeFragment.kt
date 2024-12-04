@@ -2,15 +2,12 @@ package ru.anura.emtesttask.presentation
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.anura.emtesttask.R
 import ru.anura.emtesttask.data.MockServer
 import ru.anura.emtesttask.databinding.FragmentWelcomeBinding
 import ru.anura.emtesttask.presentation.adapters.OffersListAdapter
@@ -89,7 +86,6 @@ class WelcomeFragment : Fragment() {
             adapter = offersListAdapter
         }
     }
-
 
 
     override fun onDestroyView() {

@@ -8,9 +8,7 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
-import java.io.File
 import java.io.InputStream
-import java.nio.charset.Charset
 import javax.inject.Inject
 
 class MockServer @Inject constructor(private val inputStreamMap: Map<String, InputStream>) {

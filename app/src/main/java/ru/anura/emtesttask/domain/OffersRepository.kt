@@ -1,7 +1,5 @@
 package ru.anura.emtesttask.domain
 
-import ru.anura.emtesttask.domain.model.Offer
-import ru.anura.emtesttask.domain.model.OfferTickets
 import ru.anura.emtesttask.domain.model.Offers
 import ru.anura.emtesttask.domain.model.OffersTickets
 import ru.anura.emtesttask.domain.model.Tickets

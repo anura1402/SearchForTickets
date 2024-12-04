@@ -2,7 +2,6 @@ package ru.anura.emtesttask.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.anura.emtesttask.domain.OffersRepository
 import javax.inject.Inject
 import javax.inject.Provider
 

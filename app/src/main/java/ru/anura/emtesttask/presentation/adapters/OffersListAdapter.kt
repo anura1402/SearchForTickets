@@ -1,21 +1,17 @@
 package ru.anura.emtesttask.presentation.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.anura.emtesttask.R
 import ru.anura.emtesttask.domain.model.Offer
-import ru.anura.emtesttask.domain.FlyMusicallyItem
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
-import javax.inject.Inject
 
 class OffersListAdapter: RecyclerView.Adapter<OffersListAdapter.OfferItemViewHolder>() {
 

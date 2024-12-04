@@ -15,7 +15,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.inject.Inject
 
-class WatchAllTicketsViewModel@Inject constructor(private val getTicketsUseCase: GetTicketsUseCase): ViewModel() {
+class WatchAllTicketsViewModel @Inject constructor(private val getTicketsUseCase: GetTicketsUseCase) :
+    ViewModel() {
     private val _tickets = MutableLiveData<List<Ticket>>()
     val tickets: LiveData<List<Ticket>> = _tickets
 

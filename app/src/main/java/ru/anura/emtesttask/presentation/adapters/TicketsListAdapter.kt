@@ -61,7 +61,6 @@ class TicketsListAdapter : RecyclerView.Adapter<TicketsListAdapter.TicketItemVie
         val difference = String.format(Locale.US, "%.1fч в пути", differenceInTime)
         holder.tvTimeInWay.text = difference
 
-        //Log.d("BadgeTag", "id: ${currentItem.id} hasTransfer: ${currentItem.hasTransfer} ")
         if (!currentItem.hasTransfer) {
             holder.withoutTransfers.visibility = View.VISIBLE
         } else {

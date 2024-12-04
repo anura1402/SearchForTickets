@@ -1,14 +1,12 @@
 package ru.anura.emtesttask.presentation.plugs
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.anura.emtesttask.R
 import ru.anura.emtesttask.databinding.FragmentPlugBinding
-import ru.anura.emtesttask.presentation.WelcomeFragment
 
 class PlugFragment : Fragment() {
     private var _binding: FragmentPlugBinding? = null
@@ -48,8 +46,6 @@ class PlugFragment : Fragment() {
     private fun returnBack() {
         requireActivity().onBackPressedDispatcher.onBackPressed()
         }
-//        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
-//        bottomNavigationView.selectedItemId = R.id.airTicketsFragment
 
     override fun onDestroy() {
         super.onDestroy()

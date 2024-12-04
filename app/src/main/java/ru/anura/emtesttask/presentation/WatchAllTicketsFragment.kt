@@ -81,7 +81,11 @@ class WatchAllTicketsFragment : Fragment() {
 
         with(binding) {
             tvDirection.text = String.format(getString(R.string.direction), from, to)
-            tvDateAndCount.text = String.format(getString(R.string.date_and_count),viewModel.getFormattedDate(date),count)
+            tvDateAndCount.text = String.format(
+                getString(R.string.date_and_count),
+                viewModel.getFormattedDate(date),
+                count
+            )
             ivBack.setOnClickListener {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
