@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.anura.emtesttask.R
-import ru.anura.emtesttask.data.model.Ticket
+import ru.anura.emtesttask.domain.model.Ticket
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.time.Duration

@@ -6,11 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.anura.emtesttask.data.model.OfferTickets
-import ru.anura.emtesttask.data.model.Ticket
-import ru.anura.emtesttask.data.model.Tickets
+import ru.anura.emtesttask.domain.model.OfferTickets
+import ru.anura.emtesttask.domain.model.Ticket
+import ru.anura.emtesttask.domain.model.Tickets
 import ru.anura.emtesttask.domain.GetOffersTicketsUseCase
 import ru.anura.emtesttask.domain.GetTicketsUseCase
+import java.text.SimpleDateFormat
+import java.util.Locale
 import javax.inject.Inject
 
 class WatchAllTicketsViewModel@Inject constructor(private val getTicketsUseCase: GetTicketsUseCase): ViewModel() {
@@ -25,5 +27,12 @@ class WatchAllTicketsViewModel@Inject constructor(private val getTicketsUseCase:
             }
             Log.d("MainActivityOffer", "Tickets: $result")
         }
+    }
+
+    fun getFormattedDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("d MMM, E", Locale("ru"))
+        val outputFormat = SimpleDateFormat("d MMMM", Locale("ru"))
+        val date = inputFormat.parse(inputDate)
+        return outputFormat.format(date ?: throw IllegalArgumentException("Invalid date"))
     }
 }

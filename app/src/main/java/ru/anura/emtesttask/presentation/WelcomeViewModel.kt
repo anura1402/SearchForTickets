@@ -1,23 +1,25 @@
 package ru.anura.emtesttask.presentation
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.anura.emtesttask.data.OffersRepositoryImpl
-import ru.anura.emtesttask.data.model.Offer
 import ru.anura.emtesttask.domain.GetOffersUseCase
-import ru.anura.emtesttask.domain.OffersRepository
+import ru.anura.emtesttask.domain.model.Offer
 import javax.inject.Inject
 
-class WelcomeViewModel @Inject constructor(private val getOffersUseCase:GetOffersUseCase): ViewModel() {
+class WelcomeViewModel @Inject constructor(
+    private val getOffersUseCase: GetOffersUseCase,
+    private val sharedPreferences: SharedPreferences
+) : ViewModel() {
 
     private val _offers = MutableLiveData<List<Offer>>()
     val offers: LiveData<List<Offer>> = _offers
+
+    private val _cachedText = MutableLiveData<String>()
+    val cachedText: LiveData<String> get() = _cachedText
 
     fun getOffers() {
         viewModelScope.launch {
@@ -25,7 +27,14 @@ class WelcomeViewModel @Inject constructor(private val getOffersUseCase:GetOffer
             if (result != null) {
                 _offers.value = result.offers
             }
-            Log.d("MainActivityOffer", "Offer: $result")
         }
+    }
+
+    fun loadCachedText() {
+        _cachedText.value = sharedPreferences.getString("lastInput", "") ?: ""
+    }
+
+    fun saveCachedText(text: String) {
+        sharedPreferences.edit().putString("lastInput", text).apply()
     }
 }

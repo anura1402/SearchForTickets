@@ -1,4 +1,4 @@
-package ru.anura.emtesttask.data.model
+package ru.anura.emtesttask.domain.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,9 +1,9 @@
 package ru.anura.emtesttask.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.anura.emtesttask.R
 import ru.anura.emtesttask.data.MockServer
@@ -14,6 +14,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: BottomNavigationView
+    private var isItemSelected = false
+
     @Inject
     lateinit var mockServer: MockServer
 
@@ -23,34 +25,77 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bottomNavigationView = binding.bottomNavigation
+        bottomNavigationView.selectedItemId = R.id.airTicketsFragment
         setupBottomNavigation()
+        supportFragmentManager.addOnBackStackChangedListener {
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.main_container)
+            if (!isItemSelected) {
+                when (currentFragment) {
+                    is WelcomeFragment -> {
+                        if (bottomNavigationView.selectedItemId != R.id.airTicketsFragment) {
+                            isItemSelected = true
+                            setSelectedNavigationItem(R.id.airTicketsFragment)
 
+                        }
+                    }
+
+                    is TheCountryWasChosenFragment -> {
+                        if (bottomNavigationView.selectedItemId != R.id.airTicketsFragment) {
+                            isItemSelected = true
+                            setSelectedNavigationItem(R.id.airTicketsFragment)
+                        }
+                    }
+
+                    is WatchAllTicketsFragment -> {
+                        if (bottomNavigationView.selectedItemId != R.id.airTicketsFragment) {
+                            isItemSelected = true
+                            setSelectedNavigationItem(R.id.airTicketsFragment)
+                        }
+                    }
+                }
+            }
+        }
     }
+
+    private fun setSelectedNavigationItem(itemId: Int) {
+        bottomNavigationView.selectedItemId = itemId
+    }
+
 
     private fun setupBottomNavigation() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.airTicketsFragment -> {
-                    launchWelcomeFragment()
-                    true
+                    if (isItemSelected) {
+                        true
+                    } else {
+                        launchWelcomeFragment()
+                        isItemSelected = true
+                        true
+                    }
+
                 }
 
                 R.id.hotelsFragment -> {
+                    isItemSelected = false
                     launchPlugFragment("кнопки меню \"Отели\"")
                     true
                 }
 
                 R.id.shorterFragment -> {
+                    isItemSelected = false
                     launchPlugFragment("кнопки меню \"Короче\"")
                     true
                 }
 
                 R.id.subscriptionFragment -> {
+                    isItemSelected = false
                     launchPlugFragment("кнопки меню \"Подписки\"")
                     true
                 }
 
                 R.id.profileFragment -> {
+                    isItemSelected = false
                     launchPlugFragment("кнопки меню \"Профиль\"")
                     true
                 }
@@ -63,24 +108,15 @@ class MainActivity : AppCompatActivity() {
     private fun launchPlugFragment(iconName: String = "какого-то экрана") {
         this.supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, PlugFragment.newInstance(iconName))
-            .addToBackStack(PlugFragment.NAME)
-            .commit()
-    }
-    private fun launchWelcomeFragment() {
-        this.supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, WelcomeFragment.newInstance())
             .addToBackStack(null)
             .commit()
     }
 
-    fun selectBottomNavigationItem(itemId: Int) {
-        bottomNavigationView.selectedItemId = itemId
-    }
-    fun setBottomNavigationSelectedItem(fragment: Fragment) {
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        when (fragment) {
-            is WelcomeFragment -> bottomNavigationView.selectedItemId = R.id.airTicketsFragment
-        }
+    private fun launchWelcomeFragment() {
+        this.supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, WelcomeFragment.newInstance())
+            .addToBackStack(WelcomeFragment.NAME)
+            .commit()
     }
 
     override fun onDestroy() {

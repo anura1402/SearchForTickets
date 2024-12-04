@@ -2,12 +2,8 @@ package ru.anura.emtesttask.presentation
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.TextUtils
-import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +13,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.anura.emtesttask.R
-import ru.anura.emtesttask.data.MockServer
-import ru.anura.emtesttask.data.model.OfferTickets
 import ru.anura.emtesttask.databinding.FragmentTheCountryWasChosenBinding
+import ru.anura.emtesttask.domain.model.OfferTickets
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -75,15 +69,14 @@ class TheCountryWasChosenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel =
             ViewModelProvider(this, viewModelFactory)[TheCountryWasChosenViewModel::class.java]
         viewModel.getOffersTickets()
         viewModel.offersTickets.observe(viewLifecycleOwner) { it ->
             with(binding) {
-                updateOfferTicketInfo(0,it,tvTitle1,tvTime1,tvPrice1)
-                updateOfferTicketInfo(1,it,tvTitle2,tvTime2,tvPrice2)
-                updateOfferTicketInfo(2,it,tvTitle3,tvTime3,tvPrice3)
+                updateOfferTicketInfo(0, it, tvTitle1, tvTime1, tvPrice1)
+                updateOfferTicketInfo(1, it, tvTitle2, tvTime2, tvPrice2)
+                updateOfferTicketInfo(2, it, tvTitle3, tvTime3, tvPrice3)
             }
         }
 
@@ -98,7 +91,7 @@ class TheCountryWasChosenFragment : Fragment() {
             icClean.setOnClickListener {
                 tvTo.text = ""
             }
-            buttonDate.text = formatDateWithStyle(Date())
+            buttonDate.text = viewModel.formatDateWithStyle(Date())
             buttonDate.setOnClickListener {
                 openCalendar(buttonDate)
             }
@@ -151,33 +144,26 @@ class TheCountryWasChosenFragment : Fragment() {
         val month = calendar.get(Calendar.MONTH)
         val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
+        val minDate = viewModel.getMinDateForBackWay()
+
         val datePickerDialog = DatePickerDialog(
             requireActivity(),
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->
                 val selectedDate = Calendar.getInstance().apply {
                     set(selectedYear, selectedMonth, selectedDayOfMonth)
                 }
-                button.text = formatDateWithStyle(selectedDate.time)
+                button.text = viewModel.formatDateWithStyle(selectedDate.time)
+                if (button == binding.buttonDate) {
+                    viewModel.updateSelectedDateForButtonDate(selectedDate.time)
+                }
             },
             year, month, dayOfMonth
         )
+
+        datePickerDialog.datePicker.minDate = minDate
         datePickerDialog.show()
     }
 
-
-    private fun formatDateWithStyle(date: Date): SpannableString {
-        val dateFormat = SimpleDateFormat("d MMM, E", Locale("ru")).format(date).replace(".", "")
-        val spannableString = SpannableString(dateFormat)
-
-        val dayOfWeekStartIndex = dateFormat.indexOf(",") + 2
-        spannableString.setSpan(
-            ForegroundColorSpan(Color.GRAY),
-            dayOfWeekStartIndex,
-            dateFormat.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        return spannableString
-    }
 
     private fun launchWatchAllTicketsFragment(
         from: String,
@@ -190,15 +176,15 @@ class TheCountryWasChosenFragment : Fragment() {
                 R.id.main_container,
                 WatchAllTicketsFragment.newInstance(from, to, date, count)
             )
-            .addToBackStack(null)
+            .addToBackStack(WatchAllTicketsFragment.NAME)
             .commit()
-        Log.d("countPass", count)
+
     }
+
 
 
     override fun onDestroy() {
         super.onDestroy()
-        //mockServer.stop()
         _binding = null
     }
 

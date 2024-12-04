@@ -1,10 +1,10 @@
 package ru.anura.emtesttask.domain
 
-import ru.anura.emtesttask.data.model.Offer
-import ru.anura.emtesttask.data.model.OfferTickets
-import ru.anura.emtesttask.data.model.Offers
-import ru.anura.emtesttask.data.model.OffersTickets
-import ru.anura.emtesttask.data.model.Tickets
+import ru.anura.emtesttask.domain.model.Offer
+import ru.anura.emtesttask.domain.model.OfferTickets
+import ru.anura.emtesttask.domain.model.Offers
+import ru.anura.emtesttask.domain.model.OffersTickets
+import ru.anura.emtesttask.domain.model.Tickets
 
 interface OffersRepository {
     suspend fun getOffers(): Offers?

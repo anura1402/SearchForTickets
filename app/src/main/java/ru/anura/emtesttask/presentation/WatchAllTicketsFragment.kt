@@ -9,15 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.anura.emtesttask.R
-import ru.anura.emtesttask.data.MockServer
 import ru.anura.emtesttask.databinding.FragmentWatchAllTicketsBinding
-import ru.anura.emtesttask.presentation.adapters.OffersListAdapter
 import ru.anura.emtesttask.presentation.adapters.TicketsListAdapter
 import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.inject.Inject
 
-class WatchAllTicketsFragment:Fragment() {
+class WatchAllTicketsFragment : Fragment() {
     private var _binding: FragmentWatchAllTicketsBinding? = null
     private val binding: FragmentWatchAllTicketsBinding
         get() = _binding ?: throw RuntimeException("FragmentWatchAllTicketsBinding == null")
@@ -73,7 +71,6 @@ class WatchAllTicketsFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel =
             ViewModelProvider(this, viewModelFactory)[WatchAllTicketsViewModel::class.java]
         viewModel.getTickets()
@@ -84,7 +81,7 @@ class WatchAllTicketsFragment:Fragment() {
 
         with(binding) {
             tvDirection.text = String.format(getString(R.string.direction), from, to)
-            tvDateAndCount.text = String.format(getString(R.string.date_and_count),formatDate(date), count)
+            tvDateAndCount.text = String.format(getString(R.string.date_and_count),viewModel.getFormattedDate(date),count)
             ivBack.setOnClickListener {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
@@ -95,22 +92,14 @@ class WatchAllTicketsFragment:Fragment() {
         val rvFlights = binding.rvFlights
         with(rvFlights) {
             ticketsListAdapter = TicketsListAdapter()
-            layoutManager = LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = ticketsListAdapter
         }
     }
 
-    private fun formatDate(inputDate: String): String {
-        val inputFormat = SimpleDateFormat("d MMM, E", Locale("ru"))
-        val outputFormat = SimpleDateFormat("d MMMM", Locale("ru"))
-
-        val date = inputFormat.parse(inputDate)
-        return outputFormat.format(date ?: throw IllegalArgumentException("Invalid date"))
-    }
 
     override fun onDestroy() {
         super.onDestroy()
-        //mockServer.stop()
         _binding = null
     }
 
@@ -123,7 +112,12 @@ class WatchAllTicketsFragment:Fragment() {
 
         const val NAME = "WatchAllTicketsFragment"
 
-        fun newInstance(from: String, to: String, date: String, count:String): WatchAllTicketsFragment {
+        fun newInstance(
+            from: String,
+            to: String,
+            date: String,
+            count: String
+        ): WatchAllTicketsFragment {
             return WatchAllTicketsFragment().apply {
                 arguments = Bundle().apply {
                     putString(KEY_FROM, from)

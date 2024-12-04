@@ -153,7 +153,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_whereever"
+            android:id="@+id/layout_wherever"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -169,23 +169,23 @@
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/iv_whereever"
+                    android:id="@+id/iv_wherever"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    app:srcCompat="@drawable/ic_whereever" />
+                    app:srcCompat="@drawable/ic_wherever" />
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/tv_whereever"
+                android:id="@+id/tv_wherever"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sf_pro_display_semibold"
                 android:gravity="center"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="@string/whereever"
+                android:text="@string/wherever"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 

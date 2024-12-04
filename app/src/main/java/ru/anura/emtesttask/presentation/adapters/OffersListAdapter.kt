@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.anura.emtesttask.R
-import ru.anura.emtesttask.data.model.Offer
+import ru.anura.emtesttask.domain.model.Offer
 import ru.anura.emtesttask.domain.FlyMusicallyItem
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols

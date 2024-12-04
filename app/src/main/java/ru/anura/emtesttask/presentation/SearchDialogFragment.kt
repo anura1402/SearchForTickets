@@ -26,6 +26,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
         parseArgs()
 
     }
+
     private fun parseArgs() {
         requireArguments().getString(KEY_FROM)?.let {
             from = it
@@ -67,9 +68,10 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
             layoutDifficultWay.setOnClickListener {
                 launchPlugFragment("кнопки \"Сложный маршрут\"")
             }
-            layoutWhereever.setOnClickListener {
-                etToDialog.setText(tvWhereever.text)
-                etToDialog.setSelection(tvWhereever.text.length)
+            layoutWherever.setOnClickListener {
+                etToDialog.setText(tvWherever.text)
+                etToDialog.setSelection(tvWherever.text.length)
+                etToDialog.clearFocus()
             }
             layoutHolidays.setOnClickListener {
                 launchPlugFragment("кнопки \"Выходные\"")
@@ -112,9 +114,10 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
             //переход к новому экрану, когда editText теряет фокус
             etToDialog.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && etToDialog.text.toString().replace(" ", "").isNotEmpty()) {
+
                     launchTheCountryWasChosenFragment(
-                        etFromDialog.text.toString().replace(" ", ""),
-                        etToDialog.text.toString().replace(" ", "")
+                        etFromDialog.text.toString().trimEnd(),
+                        etToDialog.text.toString().trimEnd()
                     )
                 }
             }
@@ -125,8 +128,8 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
                     EditorInfo.IME_ACTION_SEARCH -> {
                         if (etToDialog.text.toString().replace(" ", "").isNotEmpty()) {
                             launchTheCountryWasChosenFragment(
-                                etFromDialog.text.toString().replace(" ", ""),
-                                etToDialog.text.toString().replace(" ", "")
+                                etFromDialog.text.toString().trimEnd(),
+                                etToDialog.text.toString().trimEnd()
                             )
                             return@setOnEditorActionListener true
                         }
@@ -140,7 +143,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
     private fun launchTheCountryWasChosenFragment(from: String, to: String) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, TheCountryWasChosenFragment.newInstance(from, to))
-            .addToBackStack(null)
+            .addToBackStack(TheCountryWasChosenFragment.NAME)
             .commit()
         dismiss()
     }

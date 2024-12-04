@@ -1,4 +1,4 @@
-package ru.anura.emtesttask.data.model
+package ru.anura.emtesttask.domain.model
 
 data class Offers(
     val offers: List<Offer>

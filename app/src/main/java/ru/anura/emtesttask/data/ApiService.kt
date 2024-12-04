@@ -3,9 +3,9 @@ package ru.anura.emtesttask.data
 import android.util.Log
 import retrofit2.Response
 import retrofit2.http.GET
-import ru.anura.emtesttask.data.model.Offers
-import ru.anura.emtesttask.data.model.OffersTickets
-import ru.anura.emtesttask.data.model.Tickets
+import ru.anura.emtesttask.domain.model.Offers
+import ru.anura.emtesttask.domain.model.OffersTickets
+import ru.anura.emtesttask.domain.model.Tickets
 
 interface ApiService {
     @GET("offers")

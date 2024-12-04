@@ -1,11 +1,11 @@
 package ru.anura.emtesttask.presentation.plugs
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import ru.anura.emtesttask.R
 import ru.anura.emtesttask.databinding.FragmentPlugBinding
 import ru.anura.emtesttask.presentation.WelcomeFragment
@@ -39,18 +39,17 @@ class PlugFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvInfo.text = getString(R.string.plug_text, iconName)
-        binding.returnButton.setOnClickListener{
+        binding.returnButton.setOnClickListener {
             returnBack()
         }
 
     }
-    private fun returnBack() {
-        requireActivity().supportFragmentManager.popBackStack(
-            PlugFragment.NAME,
-            FragmentManager.POP_BACK_STACK_INCLUSIVE
-        )
 
-    }
+    private fun returnBack() {
+        requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+//        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+//        bottomNavigationView.selectedItemId = R.id.airTicketsFragment
 
     override fun onDestroy() {
         super.onDestroy()

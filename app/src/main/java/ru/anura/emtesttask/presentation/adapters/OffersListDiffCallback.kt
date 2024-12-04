@@ -1,7 +1,7 @@
 package ru.anura.emtesttask.presentation.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.anura.emtesttask.data.model.Offer
+import ru.anura.emtesttask.domain.model.Offer
 
 class OffersListDiffCallback (
     private val oldList: List<Offer>,

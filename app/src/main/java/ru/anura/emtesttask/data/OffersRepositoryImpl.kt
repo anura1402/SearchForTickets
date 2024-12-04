@@ -4,11 +4,11 @@ import android.app.Application
 import android.util.Log
 import kotlinx.coroutines.delay
 import retrofit2.Response
-import ru.anura.emtesttask.data.model.Offer
-import ru.anura.emtesttask.data.model.OfferTickets
-import ru.anura.emtesttask.data.model.Offers
-import ru.anura.emtesttask.data.model.OffersTickets
-import ru.anura.emtesttask.data.model.Tickets
+import ru.anura.emtesttask.domain.model.Offer
+import ru.anura.emtesttask.domain.model.OfferTickets
+import ru.anura.emtesttask.domain.model.Offers
+import ru.anura.emtesttask.domain.model.OffersTickets
+import ru.anura.emtesttask.domain.model.Tickets
 import ru.anura.emtesttask.domain.OffersRepository
 import javax.inject.Inject
 
