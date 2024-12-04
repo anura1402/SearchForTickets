@@ -11,11 +11,20 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.anura.emtesttask.R
+import ru.anura.emtesttask.data.ApiFactory
+import ru.anura.emtesttask.data.MockServer
+import ru.anura.emtesttask.data.OffersRepositoryImpl
 import ru.anura.emtesttask.databinding.FragmentWelcomeBinding
 import ru.anura.emtesttask.domain.FlyMusicallyItem
+import ru.anura.emtesttask.domain.GetOffersUseCase
 import ru.anura.emtesttask.presentation.adapters.OffersListAdapter
 
 class WelcomeFragment : Fragment() {
@@ -23,6 +32,8 @@ class WelcomeFragment : Fragment() {
     private val binding: FragmentWelcomeBinding
         get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
 
+    private lateinit var viewModel: WelcomeViewModel
+    private lateinit var mockServer: MockServer
     private lateinit var offersListAdapter: OffersListAdapter
     private lateinit var imm: InputMethodManager
     private val dialog = SearchDialogFragment()
@@ -37,8 +48,39 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //viewModel = ViewModelProvider(this)[WelcomeViewModel::class.java]
         setupRecyclerView()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val assetManager = context?.assets // Используем context для доступа к assets
+            val inputStream = assetManager?.open("offers.json")
+            if (inputStream !== null) {
+                mockServer = MockServer(inputStream)
+                mockServer.start()
+                val apiService = ApiFactory.createApiService(mockServer.getUrl())
+                Log.d("MainActivityOffer", "urlWF: ${mockServer.getUrl()}")
+                val repository = OffersRepositoryImpl(apiService)
+                withContext(Dispatchers.Main) {
+                    // Получаем URL для Retrofit
+                    viewModel = ViewModelProvider(
+                        this@WelcomeFragment,
+                        WelcomeViewModelFactory(repository)
+                    )[WelcomeViewModel::class.java]
+                    viewModel.getOffers()
+                    viewModel.offers.observe(viewLifecycleOwner) { offers ->
+                        offers.forEach { offer ->
+                            Log.d("MainActivityOffer", "Offer: $offer")
+                        }
+                    }
+                }
+            }
+        }
 
+        actionWithEtTo()
+
+    }
+
+
+    private fun actionWithEtTo() {
         imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         with(binding.etTo) {
             hideKeyboard(this)
@@ -46,15 +88,6 @@ class WelcomeFragment : Fragment() {
             imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
             setOnClickListener {
                 dialog.show(parentFragmentManager, "BottomSheetDialog")
-            }
-        }
-        binding.etFrom.setOnEditorActionListener { _, actionId, _ ->
-            Log.d("KeyLogger", "ActionId: $actionId")
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                Log.d("KeyLogger", "Done key pressed")
-                true
-            } else {
-                false
             }
         }
     }
@@ -75,6 +108,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        mockServer.stop()
         _binding = null
     }
 

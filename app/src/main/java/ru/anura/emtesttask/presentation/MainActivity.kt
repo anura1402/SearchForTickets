@@ -3,7 +3,6 @@ package ru.anura.emtesttask.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.anura.emtesttask.R
 import ru.anura.emtesttask.databinding.ActivityMainBinding
@@ -18,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bottomNavigationView = binding.bottomNavigation
-
         setupBottomNavigation()
     }
 

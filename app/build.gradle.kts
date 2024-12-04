@@ -50,9 +50,21 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     //navigation menu
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //recycler view
     implementation(libs.androidx.recyclerview)
+
+    // retrofit
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+
+    //coroutines
+    implementation (libs.kotlinx.coroutines.android)
+    implementation(libs.retrofit2.kotlin.coroutines.adapter)
+
+    //mock
+    implementation (libs.mockwebserver)
+
 }
