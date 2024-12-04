@@ -119,7 +119,8 @@
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_1"
-        android:fontFamily="@font/sf_pro_display_semibold"/>
+        android:fontFamily="@font/sf_pro_display_semibold"
+        android:textColor="@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fly_musically"

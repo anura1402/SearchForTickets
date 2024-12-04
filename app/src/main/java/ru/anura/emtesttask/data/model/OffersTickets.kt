@@ -1,11 +1,14 @@
 package ru.anura.emtesttask.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class OffersTickets(
-    val offerTickets: List<OfferTickets>
+    @SerializedName("tickets_offers")
+    val offersTickets: List<OfferTickets>
 )
 data class OfferTickets(
     val id: Int,
     val title:String,
-    val timeRange: List<String>,
+    @SerializedName("time_range") val timeRange: List<String>,
     val price: Price
 )

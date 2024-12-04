@@ -1,34 +1,46 @@
 package ru.anura.emtesttask.presentation
 
-import android.app.DatePickerDialog
-import android.graphics.Color
+import android.content.Context
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.anura.emtesttask.R
-import ru.anura.emtesttask.databinding.FragmentTheCountryWasChosenBinding
+import ru.anura.emtesttask.data.MockServer
 import ru.anura.emtesttask.databinding.FragmentWatchAllTicketsBinding
+import ru.anura.emtesttask.presentation.adapters.OffersListAdapter
+import ru.anura.emtesttask.presentation.adapters.TicketsListAdapter
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
 
 class WatchAllTicketsFragment:Fragment() {
     private var _binding: FragmentWatchAllTicketsBinding? = null
     private val binding: FragmentWatchAllTicketsBinding
         get() = _binding ?: throw RuntimeException("FragmentWatchAllTicketsBinding == null")
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: WatchAllTicketsViewModel
+
+
+    private val component by lazy {
+        (requireActivity().application as SearchApp).component
+    }
+
+    private lateinit var ticketsListAdapter: TicketsListAdapter
     private lateinit var from: String
     private lateinit var to: String
     private lateinit var date: String
     private lateinit var count: String
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,9 +74,29 @@ class WatchAllTicketsFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[WatchAllTicketsViewModel::class.java]
+        viewModel.getTickets()
+        setupRecyclerView()
+        viewModel.tickets.observe(viewLifecycleOwner) { it ->
+            ticketsListAdapter.ticketsList = it
+        }
+
         with(binding) {
             tvDirection.text = String.format(getString(R.string.direction), from, to)
             tvDateAndCount.text = String.format(getString(R.string.date_and_count),formatDate(date), count)
+            ivBack.setOnClickListener {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        val rvFlights = binding.rvFlights
+        with(rvFlights) {
+            ticketsListAdapter = TicketsListAdapter()
+            layoutManager = LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            adapter = ticketsListAdapter
         }
     }
 
@@ -78,6 +110,7 @@ class WatchAllTicketsFragment:Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        //mockServer.stop()
         _binding = null
     }
 

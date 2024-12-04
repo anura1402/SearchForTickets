@@ -22,7 +22,9 @@ class WelcomeViewModel @Inject constructor(private val getOffersUseCase:GetOffer
     fun getOffers() {
         viewModelScope.launch {
             val result = getOffersUseCase()
-            _offers.value = result ?: emptyList()
+            if (result != null) {
+                _offers.value = result.offers
+            }
             Log.d("MainActivityOffer", "Offer: $result")
         }
     }

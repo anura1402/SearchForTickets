@@ -1,5 +1,7 @@
 package ru.anura.emtesttask.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Tickets(
     val tickets: List<Ticket>
 )
@@ -11,7 +13,7 @@ data class Ticket(
     val company: String,
     val departure: Departure,
     val arrival: Arrival,
-    val hasTransfer: Boolean,
+    @SerializedName("has_transfer") val hasTransfer: Boolean,
     val hasVisaTransfer: Boolean,
     val luggage: Luggage,
     val handLuggage: HandLuggage,

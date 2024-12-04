@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/grey2">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:contentDescription="@string/close"
         android:src="@drawable/ic_close_dialog" />
 
     <androidx.cardview.widget.CardView
@@ -424,6 +426,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
                 android:background="@color/grey4" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

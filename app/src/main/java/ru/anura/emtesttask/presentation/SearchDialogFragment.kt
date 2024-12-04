@@ -2,7 +2,6 @@ package ru.anura.emtesttask.presentation
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,40 +10,54 @@ import android.view.inputmethod.EditorInfo
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.anura.emtesttask.R
-import ru.anura.emtesttask.databinding.DestinationDialogLayoutBinding
+import ru.anura.emtesttask.databinding.SearchDialogLayoutBinding
 import ru.anura.emtesttask.presentation.plugs.PlugFragment
 
 
 class SearchDialogFragment : BottomSheetDialogFragment() {
-    private var _binding: DestinationDialogLayoutBinding? = null
-    private val binding: DestinationDialogLayoutBinding
+    private var _binding: SearchDialogLayoutBinding? = null
+    private val binding: SearchDialogLayoutBinding
         get() = _binding ?: throw RuntimeException("DestinationDialogLayoutBinding == null")
     private lateinit var rootView: View
+    private lateinit var from: String
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        parseArgs()
 
+    }
+    private fun parseArgs() {
+        requireArguments().getString(KEY_FROM)?.let {
+            from = it
+        }
+    }
 
     override fun onStart() {
         super.onStart()
         val bottomSheet =
             dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-        bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+        //bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+        val displayMetrics = resources.displayMetrics
+        val screenHeight = displayMetrics.heightPixels
+        bottomSheet?.layoutParams?.height = (displayMetrics.heightPixels * 0.97).toInt()
 
         val behavior = BottomSheetBehavior.from(bottomSheet!!)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
-        behavior.skipCollapsed = true
+        //behavior.skipCollapsed = true
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DestinationDialogLayoutBinding.inflate(inflater, container, false)
+        _binding = SearchDialogLayoutBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rootView = requireActivity().window.decorView
+        binding.etFromDialog.setText(from)
         actionsWithEditTextToCountry()
         buttonListeners()
     }
@@ -67,25 +80,30 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
             layoutIstanbul.setOnClickListener {
                 etToDialog.setText(tvIstanbul.text)
                 etToDialog.setSelection(tvIstanbul.text.length)
+                etToDialog.clearFocus()
             }
             layoutSochi.setOnClickListener {
                 etToDialog.setText(tvSochi.text)
                 etToDialog.setSelection(tvSochi.text.length)
+                etToDialog.clearFocus()
             }
             layoutPhuket.setOnClickListener {
                 etToDialog.setText(tvPhuket.text)
                 etToDialog.setSelection(tvPhuket.text.length)
+                etToDialog.clearFocus()
+
             }
             icClean.setOnClickListener {
                 etToDialog.setText("")
             }
         }
     }
+
     private fun actionsWithEditTextToCountry() {
         with(binding) {
             if (etFromDialog.text.toString().isEmpty()) {
                 etFromDialog.requestFocus()
-            } else{
+            } else {
                 etToDialog.requestFocus()
             }
             //Слушатель клавиатуры
@@ -93,9 +111,11 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
 
             //переход к новому экрану, когда editText теряет фокус
             etToDialog.setOnFocusChangeListener { _, hasFocus ->
-                Log.d("etToDialog", "hasFocus: $hasFocus")
                 if (!hasFocus && etToDialog.text.toString().replace(" ", "").isNotEmpty()) {
-                    launchTheCountryWasChosenFragment("Минск",etToDialog.text.toString().replace(" ", ""))
+                    launchTheCountryWasChosenFragment(
+                        etFromDialog.text.toString().replace(" ", ""),
+                        etToDialog.text.toString().replace(" ", "")
+                    )
                 }
             }
 
@@ -104,7 +124,10 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
                 when (actionId) {
                     EditorInfo.IME_ACTION_SEARCH -> {
                         if (etToDialog.text.toString().replace(" ", "").isNotEmpty()) {
-                            launchTheCountryWasChosenFragment("Минск",etToDialog.text.toString().replace(" ", ""))
+                            launchTheCountryWasChosenFragment(
+                                etFromDialog.text.toString().replace(" ", ""),
+                                etToDialog.text.toString().replace(" ", "")
+                            )
                             return@setOnEditorActionListener true
                         }
                     }
@@ -114,9 +137,9 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun launchTheCountryWasChosenFragment(from:String,to:String) {
+    private fun launchTheCountryWasChosenFragment(from: String, to: String) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, TheCountryWasChosenFragment.newInstance(from,to))
+            .replace(R.id.main_container, TheCountryWasChosenFragment.newInstance(from, to))
             .addToBackStack(null)
             .commit()
         dismiss()
@@ -147,5 +170,17 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
         super.onDestroy()
         rootView.viewTreeObserver.removeOnGlobalLayoutListener(globalLayoutListener)
         _binding = null
+    }
+
+    companion object {
+        private const val KEY_FROM = "key_from"
+
+        fun newInstance(from: String): SearchDialogFragment {
+            return SearchDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putString(KEY_FROM, from)
+                }
+            }
+        }
     }
 }

@@ -38,4 +38,5 @@
     <string name="badge">Без пересадок</string>
     <string name="direction">%s — %s</string>
     <string name="date_and_count">%s, %s пассажир</string>
+    <string name="close">close</string>
 </resources>

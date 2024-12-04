@@ -3,14 +3,20 @@ package ru.anura.emtesttask.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.anura.emtesttask.R
+import ru.anura.emtesttask.data.MockServer
 import ru.anura.emtesttask.databinding.ActivityMainBinding
 import ru.anura.emtesttask.presentation.plugs.PlugFragment
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: BottomNavigationView
+    @Inject
+    lateinit var mockServer: MockServer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate(savedInstanceState)
@@ -18,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         bottomNavigationView = binding.bottomNavigation
         setupBottomNavigation()
+
     }
 
     private fun setupBottomNavigation() {
@@ -68,6 +75,17 @@ class MainActivity : AppCompatActivity() {
 
     fun selectBottomNavigationItem(itemId: Int) {
         bottomNavigationView.selectedItemId = itemId
+    }
+    fun setBottomNavigationSelectedItem(fragment: Fragment) {
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        when (fragment) {
+            is WelcomeFragment -> bottomNavigationView.selectedItemId = R.id.airTicketsFragment
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mockServer.stop()
     }
 }
 
