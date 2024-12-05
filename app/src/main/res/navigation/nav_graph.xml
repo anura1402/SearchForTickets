@@ -1,0 +1,56 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/welcomeFragment"
+    android:id="@+id/nav_graph">
+
+
+    <!-- WelcomeFragment из feature-search -->
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="ru.anura.feature_search.ui.WelcomeFragment"
+        android:label="Welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_searchDialogFragment"
+            app:destination="@id/searchDialogFragment" />
+    </fragment>
+
+    <!-- SearchDialogFragment из feature-search -->
+    <fragment
+        android:id="@+id/searchDialogFragment"
+        android:name="ru.anura.feature_search.ui.SearchDialogFragment"
+        android:label="Search Dialog">
+        <action
+            android:id="@+id/action_searchDialogFragment_to_countryChosenFragment"
+            app:destination="@id/countryChosenFragment" />
+    </fragment>
+
+    <!-- TheCountryWasChosenFragment из feature-tickets -->
+    <fragment
+        android:id="@+id/countryChosenFragment"
+        android:name="ru.anura.feature_tickets.ui.TheCountryWasChosenFragment"
+        android:label="Country Selected">
+        <action
+            android:id="@+id/action_countryChosenFragment_to_watchAllTicketsFragment"
+            app:destination="@id/watchAllTicketsFragment" />
+    </fragment>
+
+    <!-- WatchAllTicketsFragment из feature-tickets -->
+    <fragment
+        android:id="@+id/watchAllTicketsFragment"
+        android:name="ru.anura.feature_tickets.ui.WatchAllTicketsFragment"
+        android:label="All Tickets" />
+
+    <!-- Переносим действие глобального перехода внутри фрагмента -->
+    <fragment
+        android:id="@+id/plugFragment"
+        android:name="ru.anura.emtesttask.presentation.PlugFragment"
+        android:label="Plug">
+        <argument
+            android:name="iconName"
+            android:defaultValue="Заглушка"
+            app:argType="string" />
+    </fragment>
+    <action android:id="@+id/action_global_plugFragment" app:destination="@id/plugFragment"/>
+    <action android:id="@+id/action_global_welcomeFragment" app:destination="@id/welcomeFragment"/>
+
+</navigation>

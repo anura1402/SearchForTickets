@@ -1,6 +1,7 @@
 package ru.anura.emtesttask.presentation
 
 import android.app.Application
+import ru.anura.emtesttask.di.AppComponent
 import ru.anura.emtesttask.di.DaggerAppComponent
 
 class SearchApp : Application(){
@@ -9,5 +10,4 @@ class SearchApp : Application(){
         DaggerAppComponent.factory()
             .create(this)
     }
-
 }

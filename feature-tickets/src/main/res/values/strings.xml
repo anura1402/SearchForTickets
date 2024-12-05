@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ticket_price">%s ₽</string>
+    <string name="time">%s — %s</string>
+    <string name="way_time">%sч в пути</string>
+    <string name="without_transfers">Без пересадок</string>
+    <string name="badge">Без пересадок</string>
+    <string name="back">обратно</string>
+    <string name="clean">clean</string>
+    <string name="example_of_pass_count_and_class">1, эконом</string>
+    <string name="filters">Фильтры</string>
+    <string name="direct_flights">Прямые рейсы</string>
+    <string name="watch_all_tickets">Посмотреть все билеты</string>
+    <string name="subscribe_for_price">Подписка на цену</string>
+    <string name="direction">%s — %s</string>
+    <string name="date_and_count">%s, %s пассажир</string>
+    <string name="filter">Фильтры</string>
+    <string name="price_schedule">График цен</string>
+</resources>

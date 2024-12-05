@@ -5,27 +5,27 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.anura.emtesttask.presentation.TheCountryWasChosenViewModel
 import ru.anura.emtesttask.presentation.ViewModelFactory
-import ru.anura.emtesttask.presentation.WatchAllTicketsViewModel
-import ru.anura.emtesttask.presentation.WelcomeViewModel
+import ru.anura.feature_search.viewmodel.WelcomeViewModel
+import ru.anura.feature_tickets.viewmodel.TheCountryWasChosenViewModel
+import ru.anura.feature_tickets.viewmodel.WatchAllTicketsViewModel
 
 @Module
 interface ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(WelcomeViewModel::class)
-    fun bindWelcomeViewModel(viewModel: WelcomeViewModel): ViewModel
+    fun bindWelcomeViewModel(viewModel: ru.anura.feature_search.viewmodel.WelcomeViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(TheCountryWasChosenViewModel::class)
-    fun bindTheCountryWasChosenViewModel(viewModel: TheCountryWasChosenViewModel): ViewModel
+    fun bindTheCountryWasChosenViewModel(viewModel: ru.anura.feature_tickets.viewmodel.TheCountryWasChosenViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(WatchAllTicketsViewModel::class)
-    fun bindWatchAllTicketsViewModel(viewModel: WatchAllTicketsViewModel): ViewModel
+    fun bindWatchAllTicketsViewModel(viewModel: ru.anura.feature_tickets.viewmodel.WatchAllTicketsViewModel): ViewModel
 
 
     @Binds

@@ -21,4 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "EMTestTask"
 include(":app")
- 
+include(":data")
+include(":feature-tickets")
+include(":feature-search")
+include(":common")
