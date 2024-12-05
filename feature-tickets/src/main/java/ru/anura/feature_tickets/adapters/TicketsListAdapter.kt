@@ -1,5 +1,6 @@
 package ru.anura.feature_tickets.adapters
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,8 @@ import java.util.Locale
 
 class TicketsListAdapter : RecyclerView.Adapter<TicketsListAdapter.TicketItemViewHolder>() {
 
+    private lateinit var context: Context
+
     var ticketsList = listOf<Ticket>()
         set(value) {
             val callback = TicketsListDiffCallback(ticketsList, value)
@@ -32,6 +35,7 @@ class TicketsListAdapter : RecyclerView.Adapter<TicketsListAdapter.TicketItemVie
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketItemViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.flight_item, parent, false)
+        context = parent.context
         return TicketItemViewHolder(view)
     }
 
@@ -58,7 +62,8 @@ class TicketsListAdapter : RecyclerView.Adapter<TicketsListAdapter.TicketItemVie
             hours
 
         }
-        val difference = String.format(Locale.US, "%.1fч в пути", differenceInTime)
+        val formattedTime = String.format(Locale.US,"%.1f", differenceInTime)
+        val difference = context.getString(R.string.way_time, formattedTime)
         holder.tvTimeInWay.text = difference
 
         if (!currentItem.hasTransfer) {
@@ -66,7 +71,6 @@ class TicketsListAdapter : RecyclerView.Adapter<TicketsListAdapter.TicketItemVie
         } else {
             View.INVISIBLE
         }
-        Log.d("BadgeTag", "id: ${currentItem.id} badge: ${currentItem.badge} ")
         if (currentItem.badge != null) {
             holder.tvBadge.visibility = View.VISIBLE
             holder.tvBadge.text = currentItem.badge

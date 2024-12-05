@@ -1,5 +1,6 @@
 package ru.anura.feature_search.ui
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.anura.common.ContainerProvider
 import ru.anura.data.MockServer
 import ru.anura.feature_search.databinding.FragmentWelcomeBinding
+import ru.anura.feature_search.di.FeatureSearchComponentProvider
 import ru.anura.feature_search.di.SearchModule
 import ru.anura.feature_search.viewmodel.WelcomeViewModel
 
@@ -27,18 +30,21 @@ class WelcomeFragment : Fragment() {
     @Inject
     lateinit var mockServer: MockServer
 
-//    private val component by lazy {
-//        (requireActivity().application as SearchApp).component
-//    }
-
     private lateinit var offersListAdapter: ru.anura.feature_search.adapters.OffersListAdapter
     private var dialog = SearchDialogFragment()
+    private lateinit var containerProvider: ContainerProvider
+
 
     override fun onAttach(context: Context) {
-        val featureSearchComponent = appComponent.plus(SearchModule())
-        featureSearchComponent.inject(this)
-        //component.inject(this)
+        val app = (requireActivity().applicationContext as FeatureSearchComponentProvider)
+            .provideFeatureSearchComponent()
+        app.inject(this)
         super.onAttach(context)
+        if (context is ContainerProvider) {
+            containerProvider = context
+        } else {
+            throw IllegalStateException("Activity must implement ContainerProvider")
+        }
     }
 
     override fun onCreateView(
@@ -64,11 +70,12 @@ class WelcomeFragment : Fragment() {
 
         //открытие модального окна
         binding.etTo.setOnClickListener {
-            dialog = SearchDialogFragment.newInstance(binding.etFrom.text.toString().trimEnd())
+            dialog = SearchDialogFragment.newInstance(binding.etFrom.text.toString().trimEnd(),containerProvider.getContainerId())
             dialog.show(parentFragmentManager, "BottomSheetDialog")
         }
 
     }
+
 
     private fun observers() {
         viewModel.loadCachedText()

@@ -46,8 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_from"
+                    <EditText
+                        android:id="@+id/et_from"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -58,7 +58,12 @@
                         android:fontFamily="@font/sf_pro_display_regular"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        tools:text="Минск" />
+                        tools:text="Минск"
+                        android:digits="абвгдеёжзийклмнопрстуфхцчшщьыъэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ "
+                        android:imeOptions="actionGo"
+                        android:inputType="text"
+                        android:singleLine="true"/>
+
 
                     <ImageView
                         android:id="@+id/ic_change"
@@ -81,8 +86,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_to"
+                    <EditText
+                        android:id="@+id/et_to"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -93,7 +98,11 @@
                         android:fontFamily="@font/sf_pro_display_regular"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        tools:text="Турция" />
+                        tools:text="Турция"
+                        android:digits="абвгдеёжзийклмнопрстуфхцчшщьыъэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ "
+                        android:imeOptions="actionGo"
+                        android:inputType="text"
+                        android:singleLine="true"/>
 
                     <ImageView
                         android:id="@+id/ic_clean"

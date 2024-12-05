@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.anura.feature_tickets.R
 import ru.anura.feature_tickets.databinding.FragmentWatchAllTicketsBinding
+import ru.anura.feature_tickets.di.FeatureTicketsComponentProvider
 import ru.anura.feature_tickets.viewmodel.WatchAllTicketsViewModel
 import javax.inject.Inject
 
@@ -34,7 +35,9 @@ class WatchAllTicketsFragment : Fragment() {
     private lateinit var count: String
 
     override fun onAttach(context: Context) {
-        //component.inject(this)
+        val app = (requireActivity().applicationContext as FeatureTicketsComponentProvider)
+            .provideFeatureTicketsComponent()
+        app.inject(this)
         super.onAttach(context)
     }
 

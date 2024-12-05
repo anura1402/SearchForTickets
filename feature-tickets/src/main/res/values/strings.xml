@@ -16,4 +16,5 @@
     <string name="date_and_count">%s, %s пассажир</string>
     <string name="filter">Фильтры</string>
     <string name="price_schedule">График цен</string>
+    <string name="fill_all">Не все поля заполнены</string>
 </resources>

@@ -6,8 +6,13 @@ import dagger.Provides
 import dagger.Subcomponent
 import ru.anura.feature_search.ui.WelcomeFragment
 
-@Component(modules = [SearchModule::class])
-internal interface FeatureSearchComponent {
+@Subcomponent(modules = [SearchModule::class])
+interface FeatureSearchComponent {
     fun inject(fragment: WelcomeFragment)
+    @Subcomponent.Factory
+    interface Factory {
+        fun create(): FeatureSearchComponent
+    }
+
 
 }

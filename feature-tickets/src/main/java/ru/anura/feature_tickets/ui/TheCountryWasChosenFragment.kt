@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.anura.common.ContainerProvider
 import ru.anura.common.model.OfferTickets
 import ru.anura.feature_tickets.R
 import ru.anura.feature_tickets.databinding.FragmentTheCountryWasChosenBinding
+import ru.anura.feature_tickets.di.FeatureTicketsComponent
+import ru.anura.feature_tickets.di.FeatureTicketsComponentProvider
 import ru.anura.feature_tickets.viewmodel.TheCountryWasChosenViewModel
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -31,17 +35,20 @@ class TheCountryWasChosenFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: TheCountryWasChosenViewModel
 
-
-//    private val component by lazy {
-//        (requireActivity().application as SearchApp).component
-//    }
-
     private lateinit var from: String
     private lateinit var to: String
+    private lateinit var containerProvider: ContainerProvider
 
     override fun onAttach(context: Context) {
-        //component.inject(this)
+        val app = (requireActivity().applicationContext as FeatureTicketsComponentProvider)
+            .provideFeatureTicketsComponent()
+        app.inject(this)
         super.onAttach(context)
+        if (context is ContainerProvider) {
+            containerProvider = context
+        } else {
+            throw IllegalStateException("Activity must implement ContainerProvider")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,15 +88,15 @@ class TheCountryWasChosenFragment : Fragment() {
         }
 
         with(binding) {
-            tvTo.text = to
-            tvFrom.text = from
+            etTo.setText(to)
+            etFrom.setText(from)
             icChange.setOnClickListener {
-                val temp = tvFrom.text
-                tvFrom.text = tvTo.text
-                tvTo.text = temp
+                val temp = etFrom.text
+                etFrom.text = etTo.text
+                etTo.text = temp
             }
             icClean.setOnClickListener {
-                tvTo.text = ""
+                etTo.setText("")
             }
             buttonDate.text = viewModel.formatDateWithStyle(Date())
             buttonDate.setOnClickListener {
@@ -99,12 +106,24 @@ class TheCountryWasChosenFragment : Fragment() {
                 openCalendar(buttonBackWay)
             }
             watchAllButton.setOnClickListener {
-                launchWatchAllTicketsFragment(
-                    tvFrom.text.toString(),
-                    tvTo.text.toString(),
-                    buttonDate.text.toString(),
-                    ru.anura.feature_tickets.ui.TheCountryWasChosenFragment.COUNT_OF_PASSENGERS
-                )
+                if (etFrom.text.isNotEmpty()&&etTo.text.isNotEmpty()){
+                    launchWatchAllTicketsFragment(
+                        etFrom.text.toString(),
+                        etTo.text.toString(),
+                        buttonDate.text.toString(),
+                        COUNT_OF_PASSENGERS
+                    )
+                } else{
+                    val toastLayout = layoutInflater.inflate(R.layout.toast_layout, null)
+                    val toastText: TextView = toastLayout.findViewById(R.id.toastText)
+                    toastText.text = getString(R.string.fill_all)
+                    val toast = Toast(requireActivity().applicationContext)
+                    toast.duration = Toast.LENGTH_SHORT
+                    toast.setView(toastLayout)
+                    toast.show()
+                    //Toast.makeText(context, "Заполните все поля", Toast.LENGTH_SHORT).show()
+                }
+
             }
             ivBack.setOnClickListener {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -171,13 +190,13 @@ class TheCountryWasChosenFragment : Fragment() {
         date: String,
         count: String
     ) {
-//        requireActivity().supportFragmentManager.beginTransaction()
-//            .replace(
-//                R.id.main_container,
-//                WatchAllTicketsFragment.newInstance(from, to, date, count)
-//            )
-//            .addToBackStack(WatchAllTicketsFragment.NAME)
-//            .commit()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(
+                containerProvider.getContainerId(),
+                WatchAllTicketsFragment.newInstance(from, to, date, count)
+            )
+            .addToBackStack(WatchAllTicketsFragment.NAME)
+            .commit()
 
     }
 

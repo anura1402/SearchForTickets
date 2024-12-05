@@ -15,8 +15,6 @@ class WelcomeViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
-    val newDetailsComponent = DaggerFeatureSearchComponent.builder().build()
-
     private val _offers = MutableLiveData<List<Offer>>()
     val offers: LiveData<List<Offer>> = _offers
 

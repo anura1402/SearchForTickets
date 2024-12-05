@@ -1,5 +1,6 @@
 package ru.anura.feature_search.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import java.util.Locale
 
 class OffersListAdapter: RecyclerView.Adapter<OffersListAdapter.OfferItemViewHolder>() {
 
+    private lateinit var context: Context
+
     var offerList = listOf<Offer>()
         set(value) {
             val callback = OffersListDiffCallback(offerList, value)
@@ -26,6 +29,7 @@ class OffersListAdapter: RecyclerView.Adapter<OffersListAdapter.OfferItemViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fly_musically_item, parent, false)
+        context = parent.context
         return OfferItemViewHolder(view)
     }
 
@@ -34,7 +38,7 @@ class OffersListAdapter: RecyclerView.Adapter<OffersListAdapter.OfferItemViewHol
         holder.image.setImageResource(imageList[position])
         holder.title.text = currentItem.title
         holder.town.text = currentItem.town
-        val priceString = "от ${formatPrice(currentItem.price.value)} ₽"
+        val priceString = context.getString(R.string.price,formatPrice(currentItem.price.value))
         holder.price.text = priceString
     }
 

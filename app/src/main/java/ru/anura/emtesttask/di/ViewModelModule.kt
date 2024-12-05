@@ -9,6 +9,7 @@ import ru.anura.emtesttask.presentation.ViewModelFactory
 import ru.anura.feature_search.viewmodel.WelcomeViewModel
 import ru.anura.feature_tickets.viewmodel.TheCountryWasChosenViewModel
 import ru.anura.feature_tickets.viewmodel.WatchAllTicketsViewModel
+import javax.inject.Provider
 
 @Module
 interface ViewModelModule {
@@ -27,7 +28,7 @@ interface ViewModelModule {
     @ViewModelKey(WatchAllTicketsViewModel::class)
     fun bindWatchAllTicketsViewModel(viewModel: ru.anura.feature_tickets.viewmodel.WatchAllTicketsViewModel): ViewModel
 
-
     @Binds
     fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
 }
