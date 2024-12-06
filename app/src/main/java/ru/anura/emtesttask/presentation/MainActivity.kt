@@ -3,12 +3,11 @@ package ru.anura.emtesttask.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.anura.common.ContainerProvider
 import ru.anura.common.PlugFragment
-import ru.anura.emtesttask.R
 import ru.anura.data.MockServer
+import ru.anura.emtesttask.R
 import ru.anura.emtesttask.databinding.ActivityMainBinding
 import ru.anura.emtesttask.di.AppComponent
 import ru.anura.emtesttask.di.DaggerAppComponent

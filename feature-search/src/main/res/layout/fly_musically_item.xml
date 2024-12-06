@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/black"
     android:orientation="vertical"
-    android:padding="16dp">
-
+    android:paddingEnd="16dp">
 
     <ImageView
         android:id="@+id/iv_fly_musically"
@@ -22,23 +21,23 @@
         android:id="@+id/fly_musically_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:layout_weight="1"
         android:layout_marginBottom="5dp"
-        android:textSize="16sp"
+        android:layout_weight="1"
         android:fontFamily="@font/sf_pro_display_medium"
-        android:text="@string/star_example" />
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="@string/star_example" />
 
     <TextView
         android:id="@+id/fly_musically_destination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:layout_weight="1"
         android:fontFamily="@font/sf_pro_display_semibold"
         android:textColor="@color/white"
-        android:layout_weight="1"
         android:textSize="14sp"
-        android:text="@string/country_example" />
+        tools:text="@string/country_example" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -48,13 +47,11 @@
             android:id="@+id/fly_musically_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:fontFamily="@font/sf_pro_display_semibold"
             android:drawablePadding="5dp"
-            android:text="@string/price_example"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:textColor="@color/white"
             android:textSize="14sp"
-            app:drawableStartCompat="@drawable/ic_plane_grey" />
+            app:drawableStartCompat="@drawable/ic_plane_grey"
+            tools:text="@string/price_example" />
     </LinearLayout>
-
-
 </LinearLayout>

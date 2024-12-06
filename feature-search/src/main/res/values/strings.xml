@@ -16,4 +16,9 @@
     <string name="holidays_plug">"кнопки \"Выходные\""</string>
     <string name="hot_tickets_plug">"кнопки \"Горячие билеты\""</string>
     <string name="price">"от %s ₽"</string>
+    <string name="search_air_tickets_text">Поиск дешевых авиабилетов</string>
+    <string name="fly_musically">Музыкально отлететь</string>
+    <string name="price_example">от 22 264 Р</string>
+    <string name="country_example">Будапешт</string>
+    <string name="star_example">Die Antwood</string>
 </resources>
