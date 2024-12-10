@@ -24,10 +24,6 @@ class WatchAllTicketsFragment : Fragment() {
     private lateinit var viewModel: WatchAllTicketsViewModel
 
 
-//    private val component by lazy {
-//        (requireActivity().application as SearchApp).component
-//    }
-
     private lateinit var ticketsListAdapter: ru.anura.feature_tickets.adapters.TicketsListAdapter
     private lateinit var from: String
     private lateinit var to: String
@@ -133,5 +129,4 @@ class WatchAllTicketsFragment : Fragment() {
             }
         }
     }
-
 }

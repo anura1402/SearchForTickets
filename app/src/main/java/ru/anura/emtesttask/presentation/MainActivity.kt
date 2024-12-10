@@ -26,8 +26,12 @@ class MainActivity : AppCompatActivity(), ContainerProvider {
     lateinit var mockServer: MockServer
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        appComponent.inject(this)
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bottomNavigationView = binding.bottomNavigation

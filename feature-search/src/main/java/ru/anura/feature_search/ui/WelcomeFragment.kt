@@ -27,9 +27,6 @@ class WelcomeFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: WelcomeViewModel
 
-    @Inject
-    lateinit var mockServer: MockServer
-
     private lateinit var offersListAdapter: ru.anura.feature_search.adapters.OffersListAdapter
     private var dialog = SearchDialogFragment()
     private lateinit var containerProvider: ContainerProvider

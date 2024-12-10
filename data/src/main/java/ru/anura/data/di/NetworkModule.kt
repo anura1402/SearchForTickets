@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import ru.anura.data.ApiFactory
@@ -24,9 +25,11 @@ interface NetworkModule {
         @JvmSuppressWildcards
         fun provideMockServer(inputStreamMap: Map<String, InputStream>): MockServer {
             val mockServer = MockServer(inputStreamMap)
-            // Запускаем сервер в фоне
-            CoroutineScope(Dispatchers.IO).launch {
+            val job = CoroutineScope(Dispatchers.IO).launch {
                 mockServer.start()
+            }
+            runBlocking {
+                job.join()
             }
             return mockServer
         }
