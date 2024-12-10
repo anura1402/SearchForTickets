@@ -70,6 +70,7 @@ class WelcomeFragment : Fragment() {
 
         //открытие модального окна
         binding.etTo.setOnClickListener {
+            binding.etFrom.clearFocus()
             dialog = SearchDialogFragment.newInstance(binding.etFrom.text.toString().trimEnd(),containerProvider.getContainerId())
             dialog.show(parentFragmentManager, "BottomSheetDialog")
         }
