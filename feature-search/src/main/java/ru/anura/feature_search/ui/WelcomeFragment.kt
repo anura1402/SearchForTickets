@@ -1,6 +1,5 @@
 package ru.anura.feature_search.ui
 
-import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,12 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.anura.common.ContainerProvider
-import ru.anura.data.MockServer
 import ru.anura.feature_search.databinding.FragmentWelcomeBinding
 import ru.anura.feature_search.di.FeatureSearchComponentProvider
-import ru.anura.feature_search.di.SearchModule
 import ru.anura.feature_search.viewmodel.WelcomeViewModel
-
 import javax.inject.Inject
 
 class WelcomeFragment : Fragment() {
@@ -54,6 +50,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
         viewModel = ViewModelProvider(this, viewModelFactory)[WelcomeViewModel::class.java]
         observers()
@@ -68,7 +65,10 @@ class WelcomeFragment : Fragment() {
         //открытие модального окна
         binding.etTo.setOnClickListener {
             binding.etFrom.clearFocus()
-            dialog = SearchDialogFragment.newInstance(binding.etFrom.text.toString().trimEnd(),containerProvider.getContainerId())
+            dialog = SearchDialogFragment.newInstance(
+                binding.etFrom.text.toString().trimEnd(),
+                containerProvider.getContainerId()
+            )
             dialog.show(parentFragmentManager, "BottomSheetDialog")
         }
 
@@ -79,6 +79,7 @@ class WelcomeFragment : Fragment() {
         viewModel.loadCachedText()
         viewModel.cachedText.observe(viewLifecycleOwner) { cachedText ->
             binding.etFrom.setText(cachedText)
+            binding.etFrom.clearFocus()
         }
         viewModel.getOffers()
         viewModel.offers.observe(viewLifecycleOwner) { offers ->

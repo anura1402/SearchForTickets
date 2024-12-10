@@ -84,7 +84,6 @@ class MainActivity : AppCompatActivity(), ContainerProvider {
                         isItemSelected = true
                         true
                     }
-
                 }
 
                 R.id.hotelsFragment -> {

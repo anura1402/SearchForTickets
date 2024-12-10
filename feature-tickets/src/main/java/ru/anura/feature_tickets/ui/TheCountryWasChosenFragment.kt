@@ -16,7 +16,6 @@ import ru.anura.common.ContainerProvider
 import ru.anura.common.model.OfferTickets
 import ru.anura.feature_tickets.R
 import ru.anura.feature_tickets.databinding.FragmentTheCountryWasChosenBinding
-import ru.anura.feature_tickets.di.FeatureTicketsComponent
 import ru.anura.feature_tickets.di.FeatureTicketsComponentProvider
 import ru.anura.feature_tickets.viewmodel.TheCountryWasChosenViewModel
 import java.text.DecimalFormat
@@ -106,14 +105,14 @@ class TheCountryWasChosenFragment : Fragment() {
                 openCalendar(buttonBackWay)
             }
             watchAllButton.setOnClickListener {
-                if (etFrom.text.isNotEmpty()&&etTo.text.isNotEmpty()){
+                if (etFrom.text.isNotEmpty() && etTo.text.isNotEmpty()) {
                     launchWatchAllTicketsFragment(
                         etFrom.text.toString(),
                         etTo.text.toString(),
                         buttonDate.text.toString(),
                         COUNT_OF_PASSENGERS
                     )
-                } else{
+                } else {
                     val toastLayout = layoutInflater.inflate(R.layout.toast_layout, null)
                     val toastText: TextView = toastLayout.findViewById(R.id.toastText)
                     toastText.text = getString(R.string.fill_all)
