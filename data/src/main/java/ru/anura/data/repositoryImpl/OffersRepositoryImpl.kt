@@ -1,4 +1,4 @@
-package ru.anura.data
+package ru.anura.data.repositoryImpl
 
 import android.util.Log
 import kotlinx.coroutines.delay
@@ -6,6 +6,7 @@ import ru.anura.common.model.Offers
 import ru.anura.common.model.OffersTickets
 import ru.anura.common.model.Tickets
 import ru.anura.common.repository.OffersRepository
+import ru.anura.data.ApiService
 import javax.inject.Inject
 
 class OffersRepositoryImpl @Inject constructor(
